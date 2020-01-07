@@ -1,6 +1,12 @@
-require "pdfkit_circleci/version"
+# frozen_string_literal: true
 
-module PdfkitCircleci
-  class Error < StandardError; end
-  # Your code goes here...
+WKHTMLTOPDF_PATH = File.expand_path '../bin/wkhtmltopdf', __dir__
+
+begin
+  require 'pdfkit'
+
+  PDFKit.configure do |config|
+    config.wkhtmltopdf = WKHTMLTOPDF_PATH
+  end
+rescue LoadError
 end
